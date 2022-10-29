@@ -7,9 +7,9 @@
       "@/*": ["./src/*"]
     },
     "types": ["node"],
-    "isolatedModules": false
+    "isolatedModules": false,
+    "target": "ES6"
   },
-
   "references": [
     {
       "path": "./tsconfig.config.json"
