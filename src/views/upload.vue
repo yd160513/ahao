@@ -83,7 +83,7 @@
           <input type="file" class="upload_inp">
           <div class="upload_drag">
             <i class="icon"></i>
-            <span class="text">将文件拖到此处，或<a href="javascript:;" class="upload_submit">点击上传</a></span>
+            <span class="text">将文件拖到此处，或<a href="javascript:void(0);" class="upload_submit">点击上传</a></span>
           </div>
           <div class="upload_mark">正在上传中，请稍等...</div>
         </section>
@@ -111,6 +111,7 @@
 import { defineComponent, onMounted } from 'vue'
 import instance from "@/api/instance";
 import SparkMD5 from 'spark-md5'
+import { singleUpload } from "../api/upload";
 
 
 export default defineComponent({
@@ -159,7 +160,7 @@ export default defineComponent({
           let formData = new FormData();
           formData.append('file', _file);
           formData.append('filename', _file.name);
-          instance.post('/upload_single', formData).then(data => {
+          singleUpload(formData).then(data => {
             if (+data.code === 0) {
               alert(`文件已经上传成功~~,您可以基于 ${data.servicePath} 访问这个资源~~`);
               return;
@@ -692,7 +693,9 @@ export default defineComponent({
             if (+data.code === 0) {
               already = data.fileList;
             }
-          } catch (err) {}
+          } catch (err) {
+            console.error(err);
+          }
 
           // 实现文件切片处理 「固定数量 & 固定大小」
           let max = 1024 * 100,

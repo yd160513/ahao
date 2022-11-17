@@ -8,7 +8,7 @@
     "dev": "concurrently -k \"npm run dev:vue\" \"npm run dev:electron\"",
     "dev:vue": "vite",
     "dev:electron": "wait-on tcp:5173 && cross-env NODE_ENV=dev electron .",
-    "server": "concurrently -k \"tsc server/index.ts\" \"node server/index\"",
+    "server": "concurrently -k \"node server/index\"",
     "build": "npm run build:vue && npm run build:electron",
     "build:vue": "run-p type-check build-only",
     "build:electron": "electron-builder",
