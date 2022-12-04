@@ -61,16 +61,18 @@ const writeFile = function writeFile(res, path, file, filename, stream) {
           fs.unlinkSync(file.path);
           res.send({
             code: 0,
-            codeText: 'upload success',
-            originalFilename: filename,
-            servicePath: path.replace(__dirname, HOSTNAME)
+            msg: 'upload success',
+            data: {
+              originalFilename: filename,
+              servicePath: path.replace(__dirname, HOSTNAME)
+            }
           });
         });
       } catch (err) {
         reject(err);
         res.send({
           code: 1,
-          codeText: err
+          msg: err
         });
       }
       return;
@@ -80,16 +82,18 @@ const writeFile = function writeFile(res, path, file, filename, stream) {
         reject(err);
         res.send({
           code: 1,
-          codeText: err
+          msg: err
         });
         return;
       }
       resolve();
       res.send({
         code: 0,
-        codeText: 'upload success',
-        originalFilename: filename,
-        servicePath: path.replace(__dirname, HOSTNAME)
+        msg: 'upload success',
+        data: {
+          originalFilename: filename,
+          servicePath: path.replace(__dirname, HOSTNAME)
+        }
       });
     });
   });
@@ -130,14 +134,16 @@ app.post('/upload_single', async (req, res) => {
     let file = (files.file && files.file[0]) || {};
     res.send({
       code: 0,
-      codeText: 'upload success',
-      originalFilename: file.originalFilename,
-      servicePath: file.path.replace(__dirname, HOSTNAME)
+      msg: 'upload success',
+      data: {
+        originalFilename: file.originalFilename,
+        servicePath: file.path.replace(__dirname, HOSTNAME)
+      }
     });
   } catch (err) {
     res.send({
       code: 1,
-      codeText: err
+      msg: err
     });
   }
 });
@@ -157,9 +163,11 @@ app.post('/upload_single_name', async (req, res) => {
     if (isExists) {
       res.send({
         code: 0,
-        codeText: 'file is exists',
-        originalFilename: filename,
-        servicePath: path.replace(__dirname, HOSTNAME)
+        msg: 'file is exists',
+        data: {
+          originalFilename: filename,
+          servicePath: path.replace(__dirname, HOSTNAME)
+        }
       });
       return;
     }
@@ -167,7 +175,7 @@ app.post('/upload_single_name', async (req, res) => {
   } catch (err) {
     res.send({
       code: 1,
-      codeText: err
+      msg: err
     });
   }
 });
@@ -191,9 +199,11 @@ app.post('/upload_single_base64', async (req, res) => {
   if (isExists) {
     res.send({
       code: 0,
-      codeText: 'file is exists',
-      originalFilename: filename,
-      servicePath: path.replace(__dirname, HOSTNAME)
+      msg: 'file is exists',
+      data: {
+        originalFilename: filename,
+        servicePath: path.replace(__dirname, HOSTNAME)
+      }
     });
     return;
   }
@@ -253,9 +263,11 @@ app.post('/upload_chunk', async (req, res) => {
     if (isExists) {
       res.send({
         code: 0,
-        codeText: 'file is exists',
-        originalFilename: filename,
-        servicePath: path.replace(__dirname, HOSTNAME)
+        msg: 'file is exists',
+        data: {
+          originalFilename: filename,
+          servicePath: path.replace(__dirname, HOSTNAME)
+        }
       });
       return;
     }
@@ -263,7 +275,7 @@ app.post('/upload_chunk', async (req, res) => {
   } catch (err) {
     res.send({
       code: 1,
-      codeText: err
+      msg: err
     });
   }
 });
@@ -279,14 +291,16 @@ app.post('/upload_merge', async (req, res) => {
     } = await merge(HASH, count);
     res.send({
       code: 0,
-      codeText: 'merge success',
-      originalFilename: filename,
-      servicePath: path.replace(__dirname, HOSTNAME)
+      msg: 'merge success',
+      data: {
+        originalFilename: filename,
+        servicePath: path.replace(__dirname, HOSTNAME)
+      }
     });
   } catch (err) {
     res.send({
       code: 1,
-      codeText: err
+      msg: err
     });
   }
 });
@@ -304,14 +318,18 @@ app.get('/upload_already', async (req, res) => {
     });
     res.send({
       code: 0,
-      codeText: '',
-      fileList: fileList
+      msg: '',
+      data: {
+        fileList: fileList
+      }
     });
   } catch (err) {
     res.send({
       code: 0,
-      codeText: '',
-      fileList: fileList
+      msg: '',
+      data: {
+        fileList: fileList
+      }
     });
   }
 });

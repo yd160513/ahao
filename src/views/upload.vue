@@ -162,10 +162,10 @@ export default defineComponent({
           formData.append('filename', _file.name);
           singleUpload(formData).then(data => {
             if (+data.code === 0) {
-              alert(`文件已经上传成功~~,您可以基于 ${data.servicePath} 访问这个资源~~`);
+              alert(`文件已经上传成功~~,您可以基于 ${data.data.servicePath} 访问这个资源~~`);
               return;
             }
-            return Promise.reject(data.codeText);
+            return Promise.reject(data.msg);
           }).catch(reason => {
             console.log(reason);
             alert('文件上传失败，请您稍后再试~~');
@@ -273,10 +273,10 @@ export default defineComponent({
               }
             });
             if (+data.code === 0) {
-              alert(`恭喜您，文件上传成功，您可以基于 ${data.servicePath} 地址去访问~~`);
+              alert(`恭喜您，文件上传成功，您可以基于 ${data.data.servicePath} 地址去访问~~`);
               return;
             }
-            throw data.codeText;
+            throw data.msg;
           } catch (err) {
             alert('很遗憾，文件上传失败，请您稍后再试~~');
           } finally {
@@ -363,10 +363,10 @@ export default defineComponent({
           formData.append('filename', filename);
           instance.post('/upload_single_name', formData).then(data => {
             if (+data.code === 0) {
-              alert(`文件已经上传成功~~,您可以基于 ${data.servicePath} 访问这个资源~~`);
+              alert(`文件已经上传成功~~,您可以基于 ${data.data.servicePath} 访问这个资源~~`);
               return;
             }
-            return Promise.reject(data.codeText);
+            return Promise.reject(data.msg);
           }).catch(reason => {
             alert('文件上传失败，请您稍后再试~~');
           }).finally(() => {
@@ -433,10 +433,10 @@ export default defineComponent({
             if (+data.code === 0) {
               upload_progress_value.style.width = `100%`;
               await delay(300);
-              alert(`恭喜您，文件上传成功，您可以基于 ${data.servicePath} 访问该文件~~`);
+              alert(`恭喜您，文件上传成功，您可以基于 ${data.data.servicePath} 访问该文件~~`);
               return;
             }
-            throw data.codeText;
+            throw data.msg;
           } catch (err) {
             alert('很遗憾，文件上传失败，请您稍后再试~~');
           } finally {
@@ -594,10 +594,10 @@ export default defineComponent({
             fm.append('filename', file.name);
             data = await instance.post('/upload_single', fm);
             if (+data.code === 0) {
-              alert(`恭喜您，文件上传成功，您可以基于 ${data.servicePath} 访问该文件~~`);
+              alert(`恭喜您，文件上传成功，您可以基于 ${data.data.servicePath} 访问该文件~~`);
               return;
             }
-            throw data.codeText;
+            throw data.msg;
           } catch (err) {
             alert(`很遗憾，文件上传失败，请您稍后再试~~`);
           } finally {
@@ -691,7 +691,7 @@ export default defineComponent({
               }
             });
             if (+data.code === 0) {
-              already = data.fileList;
+              already = data.data.fileList;
             }
           } catch (err) {
             console.error(err);
@@ -739,11 +739,11 @@ export default defineComponent({
                 }
               });
               if (+data.code === 0) {
-                alert(`恭喜您，文件上传成功，您可以基于 ${data.servicePath} 访问该文件~~`);
+                alert(`恭喜您，文件上传成功，您可以基于 ${data.data.servicePath} 访问该文件~~`);
                 clear();
                 return;
               }
-              throw data.codeText;
+              throw data.msg;
             } catch (err) {
               alert('切片合并失败，请您稍后再试~~');
               clear();
@@ -765,7 +765,7 @@ export default defineComponent({
                 complate();
                 return;
               }
-              return Promise.reject(data.codeText);
+              return Promise.reject(data.msg);
             }).catch(() => {
               alert('当前切片上传失败，请您稍后再试~~');
               clear();

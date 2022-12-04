@@ -6,9 +6,11 @@
     filename:文件名字
   return:application/json
     code:0成功 1失败,
-    codeText:状态描述,
-    originalFilename:文件原始名称,
-    servicePath:文件服务器地址
+    msg:状态描述,
+    data: {
+      originalFilename:文件原始名称,
+      servicePath:文件服务器地址
+    }
 
 2.单文件上传处理「FORM-DATA」:由客户端生成文件的名字，传递给服务器处理
   url:/upload_single_name
@@ -18,9 +20,11 @@
     filename:文件名字「自己需要处理成为HASH名字」
   return:application/json
     code:0成功 1失败,
-    codeText:状态描述,
-    originalFilename:文件原始名称,
-    servicePath:文件服务器地址
+    msg:状态描述,
+    data: {
+      originalFilename:文件原始名称,
+      servicePath:文件服务器地址
+    }
 
 3.单文件上传处理「BASE64」
   url:/upload_single_base64
@@ -30,9 +34,11 @@
     filename:文件名字
   return:application/json
     code:0成功 1失败,
-    codeText:状态描述,
-    originalFilename:文件原始名称,
-    servicePath:文件服务器地址
+    msg:状态描述,
+    data: {
+      originalFilename:文件原始名称,
+      servicePath:文件服务器地址
+    }
 
 4.上传切片
   url:/upload_chunk
@@ -42,9 +48,11 @@
     filename:切片名字「文件生成的HASH_切片编号.后缀」
   return:application/json
     code:0成功 1失败,
-    codeText:状态描述,
-    originalFilename:文件原始名称,
-    servicePath:文件服务器地址
+    msg:状态描述,
+    data: {
+      originalFilename:文件原始名称,
+      servicePath:文件服务器地址
+    }
 
 5.合并切片
   url:/upload_merge
@@ -54,9 +62,11 @@
     count:切片数量
   return:application/json
     code:0成功 1失败,
-    codeText:状态描述,
-    originalFilename:文件原始名称,
-    servicePath:文件服务器地址
+    msg:状态描述,
+    data: {
+      originalFilename:文件原始名称,
+      servicePath:文件服务器地址
+    }
 
 6.获取已经上传的切片
   url:/upload_already
@@ -65,5 +75,7 @@
     HASH:文件的HASH名字
   return:application/json
     code:0成功 1失败,
-    codeText:状态描述,
-    fileList:[...]
+    msg:状态描述,
+    data: {
+      fileList:[...]
+    }
